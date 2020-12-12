@@ -1,4 +1,4 @@
-package de.eurofunk.broker.persistance.entity.repository;
+package de.eurofunk.broker.server.persistance.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

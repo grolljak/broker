@@ -1,10 +1,9 @@
-package de.eurofunk.broker.service;
+package de.eurofunk.broker.server.service;
 
-import de.eurofunk.broker.DeviceGroup;
-import de.eurofunk.broker.MessageDevice;
+import de.eurofunk.broker.server.domain.DeviceGroup;
+import de.eurofunk.broker.server.domain.MessageDevice;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component

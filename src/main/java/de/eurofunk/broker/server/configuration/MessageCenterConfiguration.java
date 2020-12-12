@@ -1,9 +1,8 @@
-package de.eurofunk.broker.configuration;
+package de.eurofunk.broker.server.configuration;
 
-import de.eurofunk.broker.DeviceGroup;
-import de.eurofunk.broker.MessageDevice;
-import de.eurofunk.broker.MessageQueue;
-import org.springframework.beans.factory.annotation.Configurable;
+import de.eurofunk.broker.server.domain.DeviceGroup;
+import de.eurofunk.broker.server.domain.MessageDevice;
+import de.eurofunk.broker.server.domain.MessageQueue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

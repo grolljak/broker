@@ -1,7 +1,7 @@
-package de.eurofunk.broker.service;
+package de.eurofunk.broker.server.service;
 
-import de.eurofunk.broker.MessageQueue;
-import de.eurofunk.broker.MyMessage;
+import de.eurofunk.broker.server.domain.MessageQueue;
+import de.eurofunk.broker.server.domain.MyMessage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

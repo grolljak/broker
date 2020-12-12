@@ -1,4 +1,4 @@
-package de.eurofunk.broker.persistance.entity;
+package de.eurofunk.broker.server.persistance.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

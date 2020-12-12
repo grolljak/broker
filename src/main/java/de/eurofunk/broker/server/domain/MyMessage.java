@@ -1,4 +1,4 @@
-package de.eurofunk.broker;
+package de.eurofunk.broker.server.domain;
 
 import java.util.Objects;
 

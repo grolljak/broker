@@ -1,4 +1,4 @@
-package de.eurofunk.broker.api.rest;
+package de.eurofunk.broker.api;
 
 public class MessageCenterController {
 
