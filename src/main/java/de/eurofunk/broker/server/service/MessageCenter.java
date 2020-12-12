@@ -12,19 +12,23 @@ public class MessageCenter {
 
     private Broker broker;
     private Map<String, DeviceGroup> deviceGroups;
-    private List<MessageDevice> messageDevices;
 
-    public MessageCenter(Broker broker, Map<String, DeviceGroup> deviceGroups, List<MessageDevice> messageDevices) { //groups and devices might be in separate services
+    public MessageCenter(Broker broker, Map<String, DeviceGroup> deviceGroups) {
         this.broker = broker;
         this.deviceGroups = deviceGroups;
-        this.messageDevices = messageDevices;
     }
 
     public void registerMessageDevice(MessageDevice device) {
         //create message device in db
 
         //add it into message devices
-        messageDevices.add(device);
+        broker.addQueue(device.getName()); //move to separate service
+    }
+
+    public void removeMessageDevice(MessageDevice device) {
+        //delete from db
+
+        broker.removeQueue(device.getName());
     }
 
     public void registerDeviceGroup(DeviceGroup group) {
@@ -32,12 +36,6 @@ public class MessageCenter {
 
         //add it into device groups
         deviceGroups.put(group.getName(), group);
-    }
-
-    public void removeMessageDevice(MessageDevice device) {
-        //delete from db
-
-        messageDevices.remove(device);
     }
 
     public void removeDeviceGroup(DeviceGroup group) {

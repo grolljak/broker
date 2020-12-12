@@ -22,7 +22,18 @@ public class Broker {
     }
 
     public String receive(String deviceName) {
-        //find queue by name and return its message
-        throw new RuntimeException("Not implemented yet.");
+        MessageQueue messageQueue = queues.get(deviceName);
+        if (messageQueue != null) {
+            return messageQueue.get();
+        }
+        throw new IllegalArgumentException("Device with name" + deviceName + " does not exist.");
+    }
+
+    public void addQueue(String name) {
+        queues.put(name, new MessageQueue(name));
+    }
+
+    public void removeQueue(String name) {
+        queues.remove(name);
     }
 }

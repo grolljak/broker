@@ -41,7 +41,7 @@ class BrokerApplicationTests {
         //when
         String sendMessage = "Hello World!";
         messageDeviceA.send(new MyMessage("a", DIRECT, sendMessage));
-        String receivedMessage = messageDeviceB.receive();
+        String receivedMessage = messageDeviceA.receive();
 
         //then
         assertEquals(sendMessage, receivedMessage);

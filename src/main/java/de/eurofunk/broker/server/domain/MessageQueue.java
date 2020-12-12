@@ -16,7 +16,11 @@ public class MessageQueue {
     }
 
     public String get() {
-        return messages.poll();
+        String retrievedMessage = messages.poll();
+        if (retrievedMessage != null) {
+            return retrievedMessage;
+        }
+        throw new IllegalStateException("No messages to be retrieved.");
     }
 
     public int size() {
