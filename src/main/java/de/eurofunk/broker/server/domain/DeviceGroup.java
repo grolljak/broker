@@ -15,6 +15,10 @@ public class DeviceGroup {
         messageDevices.add(device);
     }
 
+    public void assignMessageDevices(List<MessageDevice> devices) {
+        messageDevices.addAll(devices);
+    }
+
     public void unassignMessageDevice(MessageDevice device) {
         messageDevices.remove(device);
     }
