@@ -1,4 +1,4 @@
-package de.eurofunk.broker.server.service;
+package de.eurofunk.broker;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

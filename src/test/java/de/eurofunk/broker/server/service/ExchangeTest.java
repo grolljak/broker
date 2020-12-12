@@ -7,38 +7,47 @@ import de.eurofunk.broker.server.domain.MyMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 import static de.eurofunk.broker.server.domain.MessageSemantic.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ExchangeTest {
 
-    Exchange exchange;
-    Map<String, DeviceGroup> deviceGroups;
-    Map<String, MessageQueue> queues;
+    private Exchange exchange;
+    private DeviceGroupService deviceGroupService;
+    private QueueService queueService;
 
     @BeforeEach
     void setUp() {
-        deviceGroups = new HashMap<>();
-        queues = new HashMap<>();
+        queueService = mock(QueueService.class);
+        deviceGroupService = mock(DeviceGroupService.class);
 
-        exchange = new Exchange(queues, deviceGroups);
+        exchange = new Exchange(queueService, deviceGroupService);
     }
 
     @Test
     void directExchangeTest() {
         //given
+        MessageQueue beeper = mockMessageQueue("beeper");
+        MessageQueue notABeeper = mockMessageQueue("not_a_beeper");
         MyMessage message = new MyMessage("beeper", DIRECT, "beep");
-        queues.put("beeper", new MessageQueue("beeper"));
-        queues.put("not_a_beeper", new MessageQueue("not_a_beeper"));
 
         //when
         exchange.send(message);
 
         //then
-        assertEquals(1, queues.get("beeper").size());
-        assertEquals(0, queues.get("not_a_beeper").size());
+        assertEquals(1, beeper.size());
+        assertEquals(0, notABeeper.size());
+    }
+
+    private MessageQueue mockMessageQueue(String name) {
+        MessageQueue beeper = new MessageQueue(name);
+        when(queueService.getQueue(name)).thenReturn(beeper);
+        return beeper;
     }
 
     @Test
@@ -47,8 +56,9 @@ class ExchangeTest {
         MyMessage message1 = new MyMessage("beeper", DIRECT, "beep");
         MyMessage message2 = new MyMessage("beeper", DIRECT, "boop");
         MyMessage message3 = new MyMessage("not_a_beeper", DIRECT, "doot");
-        queues.put("beeper", new MessageQueue("beeper"));
-        queues.put("not_a_beeper", new MessageQueue("not_a_beeper"));
+
+        MessageQueue beeper = mockMessageQueue("beeper");
+        MessageQueue notABeeper = mockMessageQueue("not_a_beeper");
 
         //when
         exchange.send(message1);
@@ -56,8 +66,8 @@ class ExchangeTest {
         exchange.send(message3);
 
         //then
-        assertEquals(2, queues.get("beeper").size());
-        assertEquals(1, queues.get("not_a_beeper").size());
+        assertEquals(2, beeper.size());
+        assertEquals(1, notABeeper.size());
     }
 
     @Test
@@ -66,7 +76,8 @@ class ExchangeTest {
         MyMessage message1 = new MyMessage("beeper", DIRECT, "beep");
         MyMessage message2 = new MyMessage("beeper", DIRECT, "boop");
         MyMessage message3 = new MyMessage("beeper", DIRECT, "beep boop");
-        queues.put("beeper", new MessageQueue("beeper"));
+
+        MessageQueue beeper = mockMessageQueue("beeper");
 
         //when
         exchange.send(message1);
@@ -74,9 +85,9 @@ class ExchangeTest {
         exchange.send(message3);
 
         //then
-        assertEquals("beep", queues.get("beeper").get());
-        assertEquals("boop", queues.get("beeper").get());
-        assertEquals("beep boop", queues.get("beeper").get());
+        assertEquals("beep", beeper.get());
+        assertEquals("boop", beeper.get());
+        assertEquals("beep boop", beeper.get());
     }
 
     @Test
@@ -94,12 +105,13 @@ class ExchangeTest {
 
         DeviceGroup beepers = new DeviceGroup("beeper");
         beepers.assignMessageDevices(devices);
-        deviceGroups.put(beepers.getName(), beepers);
 
-        queues.put("beeper_a", new MessageQueue("beeper_a"));
-        queues.put("beeper_b", new MessageQueue("beeper_b"));
-        queues.put("beeper_c", new MessageQueue("beeper_c"));
-        queues.put("not_a_beeper", new MessageQueue("not_a_beeper"));
+        when(deviceGroupService.getGroup("beeper")).thenReturn(beepers);
+
+        MessageQueue beeperA = mockMessageQueue("beeper_a");
+        MessageQueue beeperB = mockMessageQueue("beeper_b");
+        MessageQueue beeperC = mockMessageQueue("beeper_c");
+        MessageQueue notABeeper = mockMessageQueue("not_a_beeper");
 
         //when
         exchange.send(message1);
@@ -107,10 +119,10 @@ class ExchangeTest {
         exchange.send(message3);
 
         //then
-        assertEquals(3, queues.get("beeper_a").size());
-        assertEquals(3, queues.get("beeper_b").size());
-        assertEquals(3, queues.get("beeper_c").size());
-        assertEquals(0, queues.get("not_a_beeper").size());
+        assertEquals(3, beeperA.size());
+        assertEquals(3, beeperB.size());
+        assertEquals(3, beeperC.size());
+        assertEquals(0, notABeeper.size());
     }
 
     @Test
@@ -128,12 +140,14 @@ class ExchangeTest {
 
         DeviceGroup beepers = new DeviceGroup("beeper");
         beepers.assignMessageDevices(devices);
-        deviceGroups.put(beepers.getName(), beepers);
+        when(deviceGroupService.getGroup("beeper")).thenReturn(beepers);
 
-        queues.put("beeper_a", new MessageQueue("beeper_a"));
-        queues.put("beeper_b", new MessageQueue("beeper_b"));
-        queues.put("beeper_c", new MessageQueue("beeper_c"));
-        queues.put("not_a_beeper", new MessageQueue("not_a_beeper"));
+        MessageQueue beeperA = mockMessageQueue("beeper_a");
+        MessageQueue beeperB = mockMessageQueue("beeper_b");
+        MessageQueue beeperC = mockMessageQueue("beeper_c");
+        MessageQueue notABeeper = mockMessageQueue("not_a_beeper");
+
+        when(queueService.getAllQueues()).thenReturn(Arrays.asList(beeperA, beeperB, beeperC, notABeeper));
 
         //when
         exchange.send(message1);
@@ -141,9 +155,9 @@ class ExchangeTest {
         exchange.send(message3);
 
         //then
-        assertEquals(3, queues.get("beeper_a").size());
-        assertEquals(3, queues.get("beeper_b").size());
-        assertEquals(3, queues.get("beeper_c").size());
-        assertEquals(3, queues.get("not_a_beeper").size());
+        assertEquals(3, beeperA.size());
+        assertEquals(3, beeperB.size());
+        assertEquals(3, beeperC.size());
+        assertEquals(3, notABeeper.size());
     }
 }

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeviceGroup {
-    List<MessageDevice> messageDevices = new ArrayList<>();
+
     private final String name;
+    private List<MessageDevice> messageDevices = new ArrayList<>();
 
     public DeviceGroup(String name) {
         this.name = name;
