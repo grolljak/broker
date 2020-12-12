@@ -1,6 +1,7 @@
 package de.eurofunk.broker.server.service;
 
 import de.eurofunk.broker.server.domain.MessageDevice;
+import de.eurofunk.broker.server.persistance.entity.MessageDeviceEntity;
 import de.eurofunk.broker.server.persistance.repository.MessageDeviceRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +17,19 @@ public class MessageDeviceService {
     }
 
     public void registerMessageDevice(MessageDevice device) {
-        //repository.save() //device to entity here
-        queueService.addQueue(device.getName()); //move to separate service
+        MessageDeviceEntity entity = toEntity(device);
+        repository.save(entity);
+        queueService.addQueue(device.getName());
     }
 
     public void removeMessageDevice(MessageDevice device) {
-        //repository.remove()
+        repository.deleteById(device.getName());
         queueService.removeQueue(device.getName());
+    }
+
+    private MessageDeviceEntity toEntity(MessageDevice device) {
+        MessageDeviceEntity entity = new MessageDeviceEntity();
+        entity.setName(device.getName());
+        return entity;
     }
 }

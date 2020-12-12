@@ -2,9 +2,8 @@ package de.eurofunk.broker;
 
 import de.eurofunk.broker.server.domain.DeviceGroup;
 import de.eurofunk.broker.server.domain.MessageDevice;
-import de.eurofunk.broker.server.domain.MessageSemantic;
 import de.eurofunk.broker.server.domain.MyMessage;
-import de.eurofunk.broker.server.service.MessageCenter;
+import de.eurofunk.broker.server.component.MessageCenter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

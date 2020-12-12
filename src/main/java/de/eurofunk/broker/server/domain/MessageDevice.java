@@ -2,7 +2,7 @@ package de.eurofunk.broker.server.domain;
 
 import de.eurofunk.broker.server.MessageConsumer;
 import de.eurofunk.broker.server.MessageProducer;
-import de.eurofunk.broker.server.service.Broker;
+import de.eurofunk.broker.server.component.Broker;
 import de.eurofunk.broker.SpringContext;
 
 public class MessageDevice implements MessageConsumer, MessageProducer {

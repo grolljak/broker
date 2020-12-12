@@ -12,6 +12,11 @@ public class DeviceGroup {
         this.name = name;
     }
 
+    public DeviceGroup(String name, List<MessageDevice> messageDevices) {
+        this.name = name;
+        this.messageDevices = messageDevices;
+    }
+
     public void assignMessageDevice(MessageDevice device) {
         messageDevices.add(device);
     }

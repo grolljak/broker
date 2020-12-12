@@ -1,6 +1,7 @@
-package de.eurofunk.broker.server.service;
+package de.eurofunk.broker.server.component;
 
 import de.eurofunk.broker.server.domain.MyMessage;
+import de.eurofunk.broker.server.service.QueueService;
 import org.springframework.stereotype.Component;
 
 @Component

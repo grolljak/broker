@@ -15,4 +15,20 @@ public class DeviceGroupEntity {
 
     @OneToMany
     List<MessageDeviceEntity> messageDevices = new ArrayList<>();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<MessageDeviceEntity> getMessageDevices() {
+        return messageDevices;
+    }
+
+    public void setMessageDevices(List<MessageDeviceEntity> messageDevices) {
+        this.messageDevices = messageDevices;
+    }
 }

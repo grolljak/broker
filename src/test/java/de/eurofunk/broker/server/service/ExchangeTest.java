@@ -1,5 +1,6 @@
 package de.eurofunk.broker.server.service;
 
+import de.eurofunk.broker.server.component.Exchange;
 import de.eurofunk.broker.server.domain.DeviceGroup;
 import de.eurofunk.broker.server.domain.MessageDevice;
 import de.eurofunk.broker.server.domain.MessageQueue;

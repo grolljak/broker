@@ -1,7 +1,9 @@
-package de.eurofunk.broker.server.service;
+package de.eurofunk.broker.server.component;
 
 import de.eurofunk.broker.server.domain.DeviceGroup;
 import de.eurofunk.broker.server.domain.MessageDevice;
+import de.eurofunk.broker.server.service.DeviceGroupService;
+import de.eurofunk.broker.server.service.MessageDeviceService;
 import org.springframework.stereotype.Component;
 
 @Component
