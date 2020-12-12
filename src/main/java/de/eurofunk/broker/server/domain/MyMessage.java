@@ -13,6 +13,12 @@ public class MyMessage {
         this.semantic = semantic;
     }
 
+    public MyMessage(MessageSemantic semantic, String message) {
+        this.routingKey = "";
+        this.message = message;
+        this.semantic = semantic;
+    }
+
     public String getRoutingKey() {
         return routingKey;
     }

@@ -21,4 +21,8 @@ public class MessageDevice implements MessageConsumer, MessageProducer {
     public void send(MyMessage message) {
         // broker.send()
     }
+
+    public String getName() {
+        return name;
+    }
 }

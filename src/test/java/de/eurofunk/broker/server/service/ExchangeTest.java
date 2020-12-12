@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static de.eurofunk.broker.server.domain.MessageSemantic.DIRECT;
-import static de.eurofunk.broker.server.domain.MessageSemantic.MULTICAST;
+import static de.eurofunk.broker.server.domain.MessageSemantic.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ExchangeTest {
@@ -115,7 +114,36 @@ class ExchangeTest {
     }
 
     @Test
-    void groupExchangeTest() {
+    void broadcastExchangeTest() {
+        //given
+        MyMessage message1 = new MyMessage(BROADCAST, "beep");
+        MyMessage message2 = new MyMessage(BROADCAST, "boop");
+        MyMessage message3 = new MyMessage(BROADCAST, "beep boop");
 
+        List<MessageDevice> devices = Arrays.asList(
+                new MessageDevice("beeper_a"),
+                new MessageDevice("beeper_b"),
+                new MessageDevice("beeper_c")
+        );
+
+        DeviceGroup beepers = new DeviceGroup("beeper");
+        beepers.assignMessageDevices(devices);
+        deviceGroups.put(beepers.getName(), beepers);
+
+        queues.put("beeper_a", new MessageQueue("beeper_a"));
+        queues.put("beeper_b", new MessageQueue("beeper_b"));
+        queues.put("beeper_c", new MessageQueue("beeper_c"));
+        queues.put("not_a_beeper", new MessageQueue("not_a_beeper"));
+
+        //when
+        exchange.send(message1);
+        exchange.send(message2);
+        exchange.send(message3);
+
+        //then
+        assertEquals(3, queues.get("beeper_a").size());
+        assertEquals(3, queues.get("beeper_b").size());
+        assertEquals(3, queues.get("beeper_c").size());
+        assertEquals(3, queues.get("not_a_beeper").size());
     }
 }

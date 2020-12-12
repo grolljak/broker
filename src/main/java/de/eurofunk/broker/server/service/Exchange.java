@@ -25,7 +25,9 @@ public class Exchange {
                 queues.get(message.getRoutingKey()).add(message.getMessage());
                 break;
             case MULTICAST:
-
+                deviceGroups.get(message.getRoutingKey()).getMessageDevices().forEach(messageDevice -> {
+                    queues.get(messageDevice.getName()).add(message.getMessage());
+                });
                 break;
             case BROADCAST:
                 break;

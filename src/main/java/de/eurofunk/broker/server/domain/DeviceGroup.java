@@ -23,6 +23,10 @@ public class DeviceGroup {
         messageDevices.remove(device);
     }
 
+    public List<MessageDevice> getMessageDevices() {
+        return messageDevices;
+    }
+
     public String getName() {
         return name;
     }
