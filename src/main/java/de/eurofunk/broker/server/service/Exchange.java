@@ -19,7 +19,6 @@ public class Exchange {
     }
 
     void send(MyMessage message) {
-        //look into message key and route to correct queue
         switch (message.getSemantic()) {
             case DIRECT:
                 queues.get(message.getRoutingKey()).add(message.getMessage());
@@ -30,10 +29,12 @@ public class Exchange {
                 });
                 break;
             case BROADCAST:
+                queues.forEach((name, queue) -> {
+                    queues.get(name).add(message.getMessage());
+                });
                 break;
             default:
                 throw new UnsupportedOperationException("Unsupported semantic " + message.getSemantic());
         }
     }
-
 }
