@@ -14,4 +14,12 @@ public class MessageQueue {
     public String getName() {
         return name;
     }
+
+    public String getFirst() {
+        return messages.getFirst();
+    }
+
+    public int size() {
+        return messages.size();
+    }
 }

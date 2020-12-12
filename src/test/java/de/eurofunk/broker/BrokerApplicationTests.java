@@ -24,10 +24,10 @@ class BrokerApplicationTests {
     void messageIntegrationTest() {
 
         //given
-        DeviceGroup deviceGroupA = new DeviceGroup("DGA");
+        DeviceGroup deviceGroupA = new DeviceGroup("a");
 
-        MessageDevice messageDeviceA = new MessageDevice("MDA");
-        MessageDevice messageDeviceB = new MessageDevice("MDB");
+        MessageDevice messageDeviceA = new MessageDevice("a");
+        MessageDevice messageDeviceB = new MessageDevice("b");
 
         deviceGroupA.assignMessageDevice(messageDeviceA); //todo: add a list
         deviceGroupA.assignMessageDevice(messageDeviceB);
@@ -38,7 +38,7 @@ class BrokerApplicationTests {
 
         //when
         String sendMessage = "Hello World!";
-        messageDeviceA.send(new MyMessage("mda", sendMessage));
+        messageDeviceA.send(new MyMessage("md_a", sendMessage));
         String receivedMessage = messageDeviceB.receive();
 
         //then
