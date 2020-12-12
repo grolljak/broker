@@ -98,7 +98,7 @@ class ExchangeTest {
         MyMessage message2 = new MyMessage("beeper", MULTICAST, "boop");
         MyMessage message3 = new MyMessage("beeper", MULTICAST, "beep boop");
 
-        List<MessageDevice> devices = Arrays.asList(
+        List<MessageDevice> devices = List.of(
                 new MessageDevice("beeper_a"),
                 new MessageDevice("beeper_b"),
                 new MessageDevice("beeper_c")
@@ -133,7 +133,7 @@ class ExchangeTest {
         MyMessage message2 = new MyMessage(BROADCAST, "boop");
         MyMessage message3 = new MyMessage(BROADCAST, "beep boop");
 
-        List<MessageDevice> devices = Arrays.asList(
+        List<MessageDevice> devices = List.of(
                 new MessageDevice("beeper_a"),
                 new MessageDevice("beeper_b"),
                 new MessageDevice("beeper_c")
@@ -148,7 +148,7 @@ class ExchangeTest {
         MessageQueue beeperC = mockMessageQueue("beeper_c");
         MessageQueue notABeeper = mockMessageQueue("not_a_beeper");
 
-        when(queueService.getAllQueues()).thenReturn(Arrays.asList(beeperA, beeperB, beeperC, notABeeper));
+        when(queueService.getAllQueues()).thenReturn(List.of(beeperA, beeperB, beeperC, notABeeper));
 
         //when
         exchange.send(message1);

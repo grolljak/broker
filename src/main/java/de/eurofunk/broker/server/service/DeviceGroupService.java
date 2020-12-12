@@ -6,6 +6,7 @@ import de.eurofunk.broker.server.persistance.entity.DeviceGroupEntity;
 import de.eurofunk.broker.server.persistance.repository.DeviceGroupRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -27,6 +28,7 @@ public class DeviceGroupService {
         repository.deleteById(group.getName());
     }
 
+    @Transactional
     public DeviceGroup getGroup(String name) {
         Optional<DeviceGroupEntity> optional = repository.findById(name);
         if (optional.isPresent()) {
