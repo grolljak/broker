@@ -2,6 +2,8 @@ package de.eurofunk.broker.server.domain;
 
 import de.eurofunk.broker.server.MessageConsumer;
 import de.eurofunk.broker.server.MessageProducer;
+import de.eurofunk.broker.server.service.Broker;
+import de.eurofunk.broker.server.service.SpringContext;
 
 public class MessageDevice implements MessageConsumer, MessageProducer {
 
@@ -13,16 +15,18 @@ public class MessageDevice implements MessageConsumer, MessageProducer {
 
     @Override
     public String receive() {
-        //broker receive()
-        return "";
+        Broker broker = SpringContext.getBean(Broker.class);
+        return broker.receive(name);
     }
 
     @Override
     public void send(MyMessage message) {
-        // broker.send()
+        Broker broker = SpringContext.getBean(Broker.class);
+        broker.send(message);
     }
 
     public String getName() {
         return name;
     }
+
 }
