@@ -2,12 +2,14 @@ package de.eurofunk.broker;
 
 import de.eurofunk.broker.server.domain.DeviceGroup;
 import de.eurofunk.broker.server.domain.MessageDevice;
+import de.eurofunk.broker.server.domain.MessageSemantic;
 import de.eurofunk.broker.server.domain.MyMessage;
 import de.eurofunk.broker.server.service.MessageCenter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static de.eurofunk.broker.server.domain.MessageSemantic.DIRECT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -38,7 +40,7 @@ class BrokerApplicationTests {
 
         //when
         String sendMessage = "Hello World!";
-        messageDeviceA.send(new MyMessage("md_a", sendMessage));
+        messageDeviceA.send(new MyMessage("a", DIRECT, sendMessage));
         String receivedMessage = messageDeviceB.receive();
 
         //then

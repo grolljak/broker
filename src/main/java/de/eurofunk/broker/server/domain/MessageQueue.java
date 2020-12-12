@@ -15,11 +15,15 @@ public class MessageQueue {
         return name;
     }
 
-    public String getFirst() {
-        return messages.getFirst();
+    public String get() {
+        return messages.poll();
     }
 
     public int size() {
         return messages.size();
+    }
+
+    public void add(String message) {
+        messages.add(message);
     }
 }
