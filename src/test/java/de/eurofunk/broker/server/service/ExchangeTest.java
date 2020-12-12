@@ -16,12 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ExchangeTest {
 
     Exchange exchange;
-    List<DeviceGroup> deviceGroups;
+    Map<String, DeviceGroup> deviceGroups;
     Map<String, MessageQueue> queues;
 
     @BeforeEach
     void setUp() {
-        deviceGroups = new ArrayList<>();
+        deviceGroups = new HashMap<>();
         queues = new HashMap<>();
 
         exchange = new Exchange(queues, deviceGroups);
@@ -95,7 +95,7 @@ class ExchangeTest {
 
         DeviceGroup beepers = new DeviceGroup("beeper");
         beepers.assignMessageDevices(devices);
-        deviceGroups.add(beepers);
+        deviceGroups.put(beepers.getName(), beepers);
 
         queues.put("beeper_a", new MessageQueue("beeper_a"));
         queues.put("beeper_b", new MessageQueue("beeper_b"));

@@ -5,15 +5,16 @@ import de.eurofunk.broker.server.domain.MessageDevice;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class MessageCenter {
 
     private Broker broker;
-    private List<DeviceGroup> deviceGroups;
+    private Map<String, DeviceGroup> deviceGroups;
     private List<MessageDevice> messageDevices;
 
-    public MessageCenter(Broker broker, List<DeviceGroup> deviceGroups, List<MessageDevice> messageDevices) { //groups and devices might be in separate services
+    public MessageCenter(Broker broker, Map<String, DeviceGroup> deviceGroups, List<MessageDevice> messageDevices) { //groups and devices might be in separate services
         this.broker = broker;
         this.deviceGroups = deviceGroups;
         this.messageDevices = messageDevices;
@@ -30,7 +31,7 @@ public class MessageCenter {
         //create device group in db
 
         //add it into device groups
-        deviceGroups.add(group);
+        deviceGroups.put(group.getName(), group);
     }
 
     public void removeMessageDevice(MessageDevice device) {

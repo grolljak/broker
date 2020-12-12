@@ -15,8 +15,8 @@ import java.util.Map;
 public class MessageCenterConfiguration {
 
     @Bean
-    List<DeviceGroup> getDeviceGroups() {
-        return new ArrayList<>(); //todo: fetch data from db on startup
+    Map<String, DeviceGroup> getDeviceGroups() {
+        return new HashMap<>(); //todo: fetch data from db on startup
     }
 
     @Bean

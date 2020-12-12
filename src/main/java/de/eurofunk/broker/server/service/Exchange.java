@@ -11,9 +11,9 @@ import java.util.Map;
 @Component
 public class Exchange {
     private Map<String, MessageQueue> queues;
-    private List<DeviceGroup> deviceGroups;
+    private Map<String, DeviceGroup> deviceGroups;
 
-    public Exchange(Map<String, MessageQueue> queues, List<DeviceGroup> deviceGroups) {
+    public Exchange(Map<String, MessageQueue> queues, Map<String, DeviceGroup> deviceGroups) {
         this.queues = queues;
         this.deviceGroups = deviceGroups;
     }
@@ -25,6 +25,7 @@ public class Exchange {
                 queues.get(message.getRoutingKey()).add(message.getMessage());
                 break;
             case MULTICAST:
+
                 break;
             case BROADCAST:
                 break;

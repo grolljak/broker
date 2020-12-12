@@ -22,4 +22,8 @@ public class DeviceGroup {
     public void unassignMessageDevice(MessageDevice device) {
         messageDevices.remove(device);
     }
+
+    public String getName() {
+        return name;
+    }
 }
