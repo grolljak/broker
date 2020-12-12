@@ -3,18 +3,20 @@ package de.eurofunk.broker.server.domain;
 import java.util.Objects;
 
 public class MyMessage {
-    private String routingKey;
+    private final String routingKey;
+    private final String message;
 
-    public MyMessage(String routingKey) {
+    public MyMessage(String routingKey, String message) {
         this.routingKey = routingKey;
+        this.message = message;
     }
 
     public String getRoutingKey() {
         return routingKey;
     }
 
-    public void setRoutingKey(String routingKey) {
-        this.routingKey = routingKey;
+    public String getMessage() {
+        return message;
     }
 
     @Override
@@ -22,11 +24,12 @@ public class MyMessage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MyMessage myMessage = (MyMessage) o;
-        return routingKey.equals(myMessage.routingKey);
+        return Objects.equals(routingKey, myMessage.routingKey) &&
+                Objects.equals(message, myMessage.message);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(routingKey);
+        return Objects.hash(routingKey, message);
     }
 }

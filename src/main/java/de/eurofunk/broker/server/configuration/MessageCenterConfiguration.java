@@ -14,16 +14,16 @@ public class MessageCenterConfiguration {
 
     @Bean
     List<DeviceGroup> getDeviceGroups() {
-        return new ArrayList<>(); //fetch data from db on startup
+        return new ArrayList<>(); //todo: fetch data from db on startup
     }
 
     @Bean
     List<MessageDevice> getMessageDevices() {
-        return new ArrayList<>(); //fetch data from db on startup
+        return new ArrayList<>(); //todo: fetch data from db on startup
     }
 
     @Bean
     List<MessageQueue> getQueues() {
-        return new ArrayList<>(); //should be loaded from message devices
+        return new ArrayList<>(); //todo: should be loaded from message devices
     }
 }

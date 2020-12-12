@@ -5,14 +5,20 @@ import de.eurofunk.broker.server.MessageProducer;
 
 public class MessageDevice implements MessageConsumer, MessageProducer {
 
-    @Override
-    public MyMessage receive() {
-        //broker receive()
-        return null;
+    private final String name;
+
+    public MessageDevice(String name) {
+        this.name = name;
     }
 
     @Override
-    public void send() {
-       // broker.send()
+    public String receive() {
+        //broker receive()
+        return "";
+    }
+
+    @Override
+    public void send(MyMessage message) {
+        // broker.send()
     }
 }
