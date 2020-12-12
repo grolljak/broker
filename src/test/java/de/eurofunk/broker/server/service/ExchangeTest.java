@@ -7,9 +7,7 @@ import de.eurofunk.broker.server.domain.MyMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,12 +15,12 @@ class ExchangeTest {
 
     Exchange exchange;
     List<DeviceGroup> deviceGroups;
-    List<MessageQueue> queues;
+    Map<String, MessageQueue> queues;
 
     @BeforeEach
     void setUp() {
         deviceGroups = new ArrayList<>();
-        queues = new ArrayList<>();
+        queues = new HashMap<>();
 
         exchange = new Exchange(queues, deviceGroups);
     }
@@ -31,14 +29,15 @@ class ExchangeTest {
     void directExchangeTest() {
         //given
         MyMessage message = new MyMessage("md_beeper", "beep");
-        queues.add(new MessageQueue("beeper"));
-        queues.add(new MessageQueue("not_a_beeper"));
+        queues.put("beeper", new MessageQueue("beeper"));
+        queues.put("not_a_beeper", new MessageQueue("not_a_beeper"));
+
         //when
         exchange.send(message);
 
         //then
-        assertEquals(1, queues.get(0).size()); //todo: change to map for easier retrieval of queues
-        assertEquals(0, queues.get(1).size());
+        assertEquals(1, queues.get("beeper").size());
+        assertEquals(0, queues.get("not_a_beeper").size());
     }
 
     @Test

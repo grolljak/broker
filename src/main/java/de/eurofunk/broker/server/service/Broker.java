@@ -5,14 +5,15 @@ import de.eurofunk.broker.server.domain.MyMessage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class Broker {
 
     private Exchange exchange;
-    private List<MessageQueue> queues;
+    private Map<String, MessageQueue> queues;
 
-    public Broker(Exchange exchange, List<MessageQueue> queues) {
+    public Broker(Exchange exchange, Map<String, MessageQueue> queues) {
         this.exchange = exchange;
         this.queues = queues;
     }

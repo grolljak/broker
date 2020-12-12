@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 public class MessageCenterConfiguration {
@@ -23,7 +25,7 @@ public class MessageCenterConfiguration {
     }
 
     @Bean
-    List<MessageQueue> getQueues() {
-        return new ArrayList<>(); //todo: should be loaded from message devices
+    Map<String, MessageQueue> getQueues() {
+        return new HashMap<>(); //todo: should be loaded from message devices
     }
 }
