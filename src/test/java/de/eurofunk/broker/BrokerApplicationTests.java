@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Transactional
 @SpringBootTest
-class BrokerApplicationTests {
+class BrokerApplicationTests extends BaseIntegrationTest {
 
     @Autowired
     MessageCenter messageCenter;
