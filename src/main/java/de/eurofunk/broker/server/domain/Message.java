@@ -2,6 +2,9 @@ package de.eurofunk.broker.server.domain;
 
 import java.util.Objects;
 
+/**
+ * Message class, carries information about messages through the system.
+ */
 public class Message {
 
     private final String routingKey;

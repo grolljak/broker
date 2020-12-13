@@ -4,6 +4,9 @@ import de.eurofunk.broker.server.Exchange;
 import de.eurofunk.broker.server.domain.Message;
 import de.eurofunk.broker.server.service.QueueService;
 
+/**
+ * Exchange agent implementation for broadcasting messages to all devices.
+ */
 public class BroadcastExchange implements Exchange {
     QueueService queueService;
 

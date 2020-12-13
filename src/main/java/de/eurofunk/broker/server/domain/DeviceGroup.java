@@ -3,6 +3,9 @@ package de.eurofunk.broker.server.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Device Group class, groups message devices together, so they can receive messages.
+ */
 public class DeviceGroup {
 
     private final String name;

@@ -11,6 +11,7 @@ import java.util.Map;
 
 @Service
 public class QueueService {
+
     private LoggingService loggingService;
     private Map<String, MessageQueue> queues = new HashMap<>();
 
@@ -32,10 +33,6 @@ public class QueueService {
             return messageQueue;
         }
         throw new RuntimeException("Queue for device with name " + deviceName + " was not correctly initiated.");
-    }
-
-    public List<MessageQueue> getAllQueues() {
-        return new ArrayList<>(queues.values());
     }
 
     public void addMessageToQueues(Message message, List<String> queuesToBeMessaged) {

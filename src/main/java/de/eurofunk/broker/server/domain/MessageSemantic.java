@@ -1,5 +1,8 @@
 package de.eurofunk.broker.server.domain;
 
+/**
+ * Message Semantic, denotes the type of Exchange agent which processes message.
+ */
 public enum MessageSemantic {
     DIRECT("direct"), MULTICAST("multicast"), BROADCAST("broadcast");
 

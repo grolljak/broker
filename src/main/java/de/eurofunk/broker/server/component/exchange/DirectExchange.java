@@ -6,6 +6,9 @@ import de.eurofunk.broker.server.service.QueueService;
 
 import java.util.List;
 
+/**
+ * Exchange agent implementation for sending direct messages.
+ */
 public class DirectExchange implements Exchange {
 
     QueueService queueService;

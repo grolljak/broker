@@ -18,13 +18,17 @@ public class LoggingService {
     Logger log = LogManager.getLogger(LoggingService.class);
 
     public String checkMessage(Message message, List<String> recipients) {
-        boolean contains = keywords.stream().anyMatch(keyword -> message.getMessage().contains(keyword));
-        if (contains) {
-            String logMessage = message.toString() + ", " + "Recipients: " + Arrays.toString(recipients.toArray());
-            log.warn(logMessage);
-            return logMessage;
+        boolean containsSomeKeyword = keywords.stream().anyMatch(keyword -> message.getMessage().contains(keyword));
+        if (containsSomeKeyword) {
+            return logAlert(message, recipients);
         }
         return "";
+    }
+
+    private String logAlert(Message message, List<String> recipients) {
+        String logMessage = message.toString() + ", " + "Recipients: " + Arrays.toString(recipients.toArray());
+        log.warn(logMessage);
+        return logMessage;
     }
 
     public void addKeyword(String keyword) {

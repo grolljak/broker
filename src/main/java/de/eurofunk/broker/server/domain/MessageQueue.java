@@ -2,6 +2,10 @@ package de.eurofunk.broker.server.domain;
 
 import java.util.LinkedList;
 
+/**
+ * Message Queue class, holds messages in queue for each device.
+ * Queues are only held in memory and they are initiated at the start of application.
+ */
 public class MessageQueue {
 
     private final String name;

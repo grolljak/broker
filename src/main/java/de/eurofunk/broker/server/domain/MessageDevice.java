@@ -5,6 +5,9 @@ import de.eurofunk.broker.server.MessageProducer;
 import de.eurofunk.broker.server.component.Broker;
 import de.eurofunk.broker.SpringContext;
 
+/**
+ * Message device class, can receive and send messages.
+ */
 public class MessageDevice implements MessageConsumer, MessageProducer {
 
     private final String name;

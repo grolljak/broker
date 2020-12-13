@@ -9,6 +9,9 @@ import de.eurofunk.broker.server.service.QueueService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Exchange agent implementation for multicasting messages to devices of specific device group.
+ */
 public class MulticastExchange implements Exchange {
 
     DeviceGroupService deviceGroupService;

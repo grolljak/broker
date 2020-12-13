@@ -21,7 +21,8 @@ project setup folder for that purpose.
 cd setup
 docker-compose up
 ```
-Note: You can use Hibernate ddl-auto property to create a schema for you once your db is running.
+
+> **_NOTE:_** You should use Hibernate ddl-auto property to create a schema once your db is running.
 
 When the database is set up, you can run the application under 'mssql' profile. It is running on the default port 8080.
 
@@ -30,3 +31,4 @@ Application provides REST API to allow basic interaction with the application. I
 there is exported postman collection that contains all available endpoints.
 
 Another way how to operate the application is through IntegrationTest.java, located in the de/eurofunk/broker package.
+It has no dependency and may be easier to start with. It runs under 'h2' profile and use in-memory database.
