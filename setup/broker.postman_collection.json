@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "04274d78-1895-4b8b-b9cb-0ad2da8766ec",
+		"name": "Eurofunk Broker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "setup",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Sets up three devices A, B, and C which are in a group A and also additional device D that is not assigned in any group."
+			},
+			"response": []
+		},
+		{
+			"name": "sendDirect",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Sends direct message from specified device with given routing key."
+			},
+			"response": []
+		},
+		{
+			"name": "sendMulticast",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Sends multicast message from specified device to all devices of given group."
+			},
+			"response": []
+		},
+		{
+			"name": "sendBroadcast",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Sends broadcast message from specified device to all devices."
+			},
+			"response": []
+		},
+		{
+			"name": "receive",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Receives message on specified device."
+			},
+			"response": []
+		},
+		{
+			"name": "removeMessageDevice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Removes message device with specified name."
+			},
+			"response": []
+		},
+		{
+			"name": "removeDeviceGroup",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Removes device group and unassignes all devices from it."
+			},
+			"response": []
+		},
+		{
+			"name": "addKeyword",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Adds keyword to the system, which will trigger logging."
+			},
+			"response": []
+		},
+		{
+			"name": "removeKeyword",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Removes keyword from the system."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
