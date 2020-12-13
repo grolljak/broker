@@ -2,8 +2,12 @@ package de.eurofunk.broker.server.component.exchange;
 
 import de.eurofunk.broker.server.Exchange;
 import de.eurofunk.broker.server.domain.Message;
+import de.eurofunk.broker.server.domain.MessageDevice;
 import de.eurofunk.broker.server.service.DeviceGroupService;
 import de.eurofunk.broker.server.service.QueueService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MulticastExchange implements Exchange {
 
@@ -17,8 +21,9 @@ public class MulticastExchange implements Exchange {
 
     @Override
     public void send(Message message) {
-        deviceGroupService.getGroup(message.getRoutingKey()).getMessageDevices().forEach(messageDevice -> {
-            queueService.getQueue(messageDevice.getName()).add(message.getMessage());
-        });
+        List<String> queuesToBeMessaged = deviceGroupService.getGroup(message.getRoutingKey())
+                .getMessageDevices().stream().map(MessageDevice::getName).collect(Collectors.toList());
+
+        queueService.addMessageToQueues(message, queuesToBeMessaged);
     }
 }

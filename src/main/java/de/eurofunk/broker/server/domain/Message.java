@@ -10,8 +10,8 @@ public class Message {
 
     public Message(String routingKey, MessageSemantic semantic, String message) {
         this.routingKey = routingKey;
-        this.message = message;
         this.semantic = semantic;
+        this.message = message;
     }
 
     public Message(MessageSemantic semantic, String message) {
@@ -45,5 +45,14 @@ public class Message {
     @Override
     public int hashCode() {
         return Objects.hash(routingKey, message, semantic);
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "routingKey='" + routingKey + '\'' +
+                ", message='" + message + '\'' +
+                ", semantic=" + semantic +
+                '}';
     }
 }

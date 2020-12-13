@@ -3,15 +3,15 @@ package de.eurofunk.broker.server.component.exchange;
 import de.eurofunk.broker.server.domain.DeviceGroup;
 import de.eurofunk.broker.server.domain.Message;
 import de.eurofunk.broker.server.domain.MessageDevice;
-import de.eurofunk.broker.server.domain.MessageQueue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 
 import static de.eurofunk.broker.server.domain.MessageSemantic.MULTICAST;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 class MulticastExchangeTest extends ExchangeTest {
 
@@ -19,36 +19,22 @@ class MulticastExchangeTest extends ExchangeTest {
     @DisplayName("when sending multicast messages, routing should work")
     void multicastExchangeTest() {
         //given
-        Message message1 = new Message("beeper", MULTICAST, "beep");
-        Message message2 = new Message("beeper", MULTICAST, "boop");
-        Message message3 = new Message("beeper", MULTICAST, "beep boop");
+        Message message = new Message("beeper", MULTICAST, "beep");
 
-        List<MessageDevice> devices = List.of(
-                new MessageDevice("beeper_a"),
-                new MessageDevice("beeper_b"),
-                new MessageDevice("beeper_c")
-        );
+        MessageDevice beeperA = new MessageDevice("beeper_a");
+        MessageDevice beeperB = new MessageDevice("beeper_b");
+        MessageDevice beeperC = new MessageDevice("beeper_c");
+        MessageDevice notABeeper = new MessageDevice("not_a_beeper");
 
-        DeviceGroup beepers = new DeviceGroup("beeper");
-        beepers.assignMessageDevices(devices);
-
-        when(deviceGroupService.getGroup("beeper")).thenReturn(beepers);
-
-        MessageQueue beeperA = mockMessageQueue("beeper_a");
-        MessageQueue beeperB = mockMessageQueue("beeper_b");
-        MessageQueue beeperC = mockMessageQueue("beeper_c");
-        MessageQueue notABeeper = mockMessageQueue("not_a_beeper");
+        when(deviceGroupService.getGroup(message.getRoutingKey())).thenReturn(new DeviceGroup("beepers", List.of(beeperA, beeperB, beeperC)));
 
         //when
-        multicastExchange.send(message1);
-        multicastExchange.send(message2);
-        multicastExchange.send(message3);
+        multicastExchange.send(message);
 
         //then
-        assertEquals(3, beeperA.size());
-        assertEquals(3, beeperB.size());
-        assertEquals(3, beeperC.size());
-        assertEquals(0, notABeeper.size());
+        ArgumentCaptor<List<String>> captor = ArgumentCaptor.forClass(List.class);
+        verify(queueService, times(1)).addMessageToQueues(eq(message), captor.capture());
+        assertEquals(3, captor.getValue().size());
     }
 
 }

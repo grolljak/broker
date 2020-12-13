@@ -13,7 +13,6 @@ public class BroadcastExchange implements Exchange {
 
     @Override
     public void send(Message message) {
-        queueService.getAllQueues().forEach(queue -> queue.add(message.getMessage()));
-
+        queueService.addMessageToAllQueues(message);
     }
 }

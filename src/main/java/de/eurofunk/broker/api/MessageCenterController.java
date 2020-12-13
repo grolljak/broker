@@ -34,7 +34,6 @@ public class MessageCenterController {
         registerNewDeviceGroup("a", List.of(messageDeviceA, messageDeviceB, messageDeviceC));
     }
 
-
     @PostMapping("/sendDirect")
     @ResponseStatus(HttpStatus.OK)
     public void sendDirectMessage(@RequestParam String from, @RequestParam String routingKey, @RequestParam String message) {
@@ -58,16 +57,28 @@ public class MessageCenterController {
         return getMessageDevice(from).receive();
     }
 
-    @DeleteMapping("/removeMessageDevice")
+    @DeleteMapping("/messageDevice")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeMessageDevice(@RequestParam String name) {
         messageCenter.removeMessageDevice(name);
     }
 
-    @DeleteMapping("/removeDeviceGroup")
+    @DeleteMapping("/deviceGroup")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeDeviceGroup(@RequestParam String name) {
         messageCenter.removeDeviceGroup(name);
+    }
+
+    @PostMapping("/keyword")
+    @ResponseStatus(HttpStatus.OK)
+    public void addKeyword(@RequestParam String value) {
+        messageCenter.addKeyword(value);
+    }
+
+    @DeleteMapping("/keyword")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeKeyword(@RequestParam String value) {
+        messageCenter.removeKeyword(value);
     }
 
     private MessageDevice getMessageDevice(@RequestParam String from) {
