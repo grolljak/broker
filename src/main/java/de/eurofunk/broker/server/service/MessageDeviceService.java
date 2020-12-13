@@ -5,6 +5,7 @@ import de.eurofunk.broker.server.persistance.entity.MessageDeviceEntity;
 import de.eurofunk.broker.server.persistance.repository.MessageDeviceRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,17 +22,20 @@ public class MessageDeviceService {
         this.queueService = queueService;
     }
 
+    @Transactional
     public void registerMessageDevice(MessageDevice device) {
         MessageDeviceEntity entity = toEntity(device);
         repository.save(entity);
         queueService.addQueue(device.getName());
     }
 
+    @Transactional
     public void removeMessageDevice(String name) {
         repository.deleteById(name);
         queueService.removeQueue(name);
     }
 
+    @Transactional
     public List<MessageDevice> getAllMessageDevices() {
         return repository.findAll().stream().map(this::toMessageDevice).collect(toList());
     }

@@ -20,10 +20,12 @@ public class DeviceGroupService {
         this.mapper = mapper;
     }
 
+    @Transactional
     public void registerDeviceGroup(DeviceGroup group) {
         repository.save(mapper.mapDeviceGroupToEntity(group));
     }
 
+    @Transactional
     public void removeDeviceGroup(String name) {
         repository.deleteById(name);
     }

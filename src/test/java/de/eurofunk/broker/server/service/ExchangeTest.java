@@ -6,9 +6,9 @@ import de.eurofunk.broker.server.domain.MessageDevice;
 import de.eurofunk.broker.server.domain.MessageQueue;
 import de.eurofunk.broker.server.domain.MyMessage;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static de.eurofunk.broker.server.domain.MessageSemantic.*;
@@ -31,6 +31,7 @@ class ExchangeTest {
     }
 
     @Test
+    @DisplayName("when sending direct message, routing should work")
     void directExchangeTest() {
         //given
         MessageQueue beeper = mockMessageQueue("beeper");
@@ -45,13 +46,8 @@ class ExchangeTest {
         assertEquals(0, notABeeper.size());
     }
 
-    private MessageQueue mockMessageQueue(String name) {
-        MessageQueue beeper = new MessageQueue(name);
-        when(queueService.getQueue(name)).thenReturn(beeper);
-        return beeper;
-    }
-
     @Test
+    @DisplayName("when sending multiple direct messages, routing should work")
     void directExchangeMultipleMessagesTest() {
         //given
         MyMessage message1 = new MyMessage("beeper", DIRECT, "beep");
@@ -72,6 +68,7 @@ class ExchangeTest {
     }
 
     @Test
+    @DisplayName("when sending multiple direct messages, correct order of messages should be followed")
     void directExchangeCorrectOrderTest() {
         //given
         MyMessage message1 = new MyMessage("beeper", DIRECT, "beep");
@@ -92,6 +89,7 @@ class ExchangeTest {
     }
 
     @Test
+    @DisplayName("when sending multicast messages, routing should work")
     void multicastExchangeTest() {
         //given
         MyMessage message1 = new MyMessage("beeper", MULTICAST, "beep");
@@ -127,6 +125,7 @@ class ExchangeTest {
     }
 
     @Test
+    @DisplayName("when sending broadcast messages, routing should work")
     void broadcastExchangeTest() {
         //given
         MyMessage message1 = new MyMessage(BROADCAST, "beep");
@@ -160,5 +159,11 @@ class ExchangeTest {
         assertEquals(3, beeperB.size());
         assertEquals(3, beeperC.size());
         assertEquals(3, notABeeper.size());
+    }
+
+    private MessageQueue mockMessageQueue(String name) {
+        MessageQueue beeper = new MessageQueue(name);
+        when(queueService.getQueue(name)).thenReturn(beeper);
+        return beeper;
     }
 }
