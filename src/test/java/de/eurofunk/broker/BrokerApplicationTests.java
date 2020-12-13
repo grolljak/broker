@@ -53,10 +53,10 @@ class BrokerApplicationTests extends BaseIntegrationTest {
         String sendMessage = "Hello World!";
         messageDeviceA.send(new MyMessage("a", DIRECT, sendMessage));
 
-        messageCenter.removeMessageDevice(messageDeviceA);
+        messageCenter.removeMessageDevice(messageDeviceA.getName());
 
         //then
-        assertThrows(IllegalArgumentException.class, messageDeviceA::receive);
+        assertThrows(RuntimeException.class, messageDeviceA::receive);
     }
 
     @Test
@@ -70,7 +70,7 @@ class BrokerApplicationTests extends BaseIntegrationTest {
         String sendMessage = "Hello World!";
         messageDevice.send(new MyMessage("a", MULTICAST, sendMessage));
 
-        messageCenter.removeDeviceGroup(deviceGroup);
+        messageCenter.removeDeviceGroup(deviceGroup.getName());
 
         //then
         assertEquals(sendMessage, messageDevice.receive());
