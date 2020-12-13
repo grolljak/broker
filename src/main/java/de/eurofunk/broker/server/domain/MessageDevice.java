@@ -20,7 +20,7 @@ public class MessageDevice implements MessageConsumer, MessageProducer {
     }
 
     @Override
-    public void send(MyMessage message) {
+    public void send(Message message) {
         Broker broker = SpringContext.getBean(Broker.class);
         broker.send(message);
     }

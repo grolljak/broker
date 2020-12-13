@@ -1,7 +1,7 @@
 package de.eurofunk.broker.server;
 
-import de.eurofunk.broker.server.domain.MyMessage;
+import de.eurofunk.broker.server.domain.Message;
 
 public interface MessageProducer {
-    void send(MyMessage message);
+    void send(Message message);
 }

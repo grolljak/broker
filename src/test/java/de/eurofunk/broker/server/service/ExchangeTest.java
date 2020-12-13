@@ -4,7 +4,7 @@ import de.eurofunk.broker.server.component.Exchange;
 import de.eurofunk.broker.server.domain.DeviceGroup;
 import de.eurofunk.broker.server.domain.MessageDevice;
 import de.eurofunk.broker.server.domain.MessageQueue;
-import de.eurofunk.broker.server.domain.MyMessage;
+import de.eurofunk.broker.server.domain.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ class ExchangeTest {
         //given
         MessageQueue beeper = mockMessageQueue("beeper");
         MessageQueue notABeeper = mockMessageQueue("not_a_beeper");
-        MyMessage message = new MyMessage("beeper", DIRECT, "beep");
+        Message message = new Message("beeper", DIRECT, "beep");
 
         //when
         exchange.send(message);
@@ -50,9 +50,9 @@ class ExchangeTest {
     @DisplayName("when sending multiple direct messages, routing should work")
     void directExchangeMultipleMessagesTest() {
         //given
-        MyMessage message1 = new MyMessage("beeper", DIRECT, "beep");
-        MyMessage message2 = new MyMessage("beeper", DIRECT, "boop");
-        MyMessage message3 = new MyMessage("not_a_beeper", DIRECT, "doot");
+        Message message1 = new Message("beeper", DIRECT, "beep");
+        Message message2 = new Message("beeper", DIRECT, "boop");
+        Message message3 = new Message("not_a_beeper", DIRECT, "doot");
 
         MessageQueue beeper = mockMessageQueue("beeper");
         MessageQueue notABeeper = mockMessageQueue("not_a_beeper");
@@ -71,9 +71,9 @@ class ExchangeTest {
     @DisplayName("when sending multiple direct messages, correct order of messages should be followed")
     void directExchangeCorrectOrderTest() {
         //given
-        MyMessage message1 = new MyMessage("beeper", DIRECT, "beep");
-        MyMessage message2 = new MyMessage("beeper", DIRECT, "boop");
-        MyMessage message3 = new MyMessage("beeper", DIRECT, "beep boop");
+        Message message1 = new Message("beeper", DIRECT, "beep");
+        Message message2 = new Message("beeper", DIRECT, "boop");
+        Message message3 = new Message("beeper", DIRECT, "beep boop");
 
         MessageQueue beeper = mockMessageQueue("beeper");
 
@@ -92,9 +92,9 @@ class ExchangeTest {
     @DisplayName("when sending multicast messages, routing should work")
     void multicastExchangeTest() {
         //given
-        MyMessage message1 = new MyMessage("beeper", MULTICAST, "beep");
-        MyMessage message2 = new MyMessage("beeper", MULTICAST, "boop");
-        MyMessage message3 = new MyMessage("beeper", MULTICAST, "beep boop");
+        Message message1 = new Message("beeper", MULTICAST, "beep");
+        Message message2 = new Message("beeper", MULTICAST, "boop");
+        Message message3 = new Message("beeper", MULTICAST, "beep boop");
 
         List<MessageDevice> devices = List.of(
                 new MessageDevice("beeper_a"),
@@ -128,9 +128,9 @@ class ExchangeTest {
     @DisplayName("when sending broadcast messages, routing should work")
     void broadcastExchangeTest() {
         //given
-        MyMessage message1 = new MyMessage(BROADCAST, "beep");
-        MyMessage message2 = new MyMessage(BROADCAST, "boop");
-        MyMessage message3 = new MyMessage(BROADCAST, "beep boop");
+        Message message1 = new Message(BROADCAST, "beep");
+        Message message2 = new Message(BROADCAST, "boop");
+        Message message3 = new Message(BROADCAST, "beep boop");
 
         List<MessageDevice> devices = List.of(
                 new MessageDevice("beeper_a"),

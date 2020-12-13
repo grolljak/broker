@@ -3,7 +3,7 @@ package de.eurofunk.broker;
 import de.eurofunk.broker.server.component.MessageCenter;
 import de.eurofunk.broker.server.domain.DeviceGroup;
 import de.eurofunk.broker.server.domain.MessageDevice;
-import de.eurofunk.broker.server.domain.MyMessage;
+import de.eurofunk.broker.server.domain.Message;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ class IntegrationTest {
 
         //when
         String sendMessage = "Hello World!";
-        messageDeviceA.send(new MyMessage("a", DIRECT, sendMessage));
+        messageDeviceA.send(new Message("a", DIRECT, sendMessage));
         String receivedMessage = messageDeviceA.receive();
 
         //then
@@ -53,7 +53,7 @@ class IntegrationTest {
 
         //when
         String sendMessage = "Hello World!";
-        messageDeviceA.send(new MyMessage("a", DIRECT, sendMessage));
+        messageDeviceA.send(new Message("a", DIRECT, sendMessage));
 
         messageCenter.removeMessageDevice(messageDeviceA.getName());
 
@@ -70,7 +70,7 @@ class IntegrationTest {
 
         //when
         String sendMessage = "Hello World!";
-        messageDevice.send(new MyMessage("a", MULTICAST, sendMessage));
+        messageDevice.send(new Message("a", MULTICAST, sendMessage));
 
         messageCenter.removeDeviceGroup(deviceGroup.getName());
 
@@ -89,7 +89,7 @@ class IntegrationTest {
 
         //when
         String sendMessage = "Hello World!";
-        messageDeviceA.send(new MyMessage("a", MULTICAST, sendMessage));
+        messageDeviceA.send(new Message("a", MULTICAST, sendMessage));
 
         //then
         String receivedMessageA = messageDeviceA.receive();
@@ -110,7 +110,7 @@ class IntegrationTest {
 
         //when
         String sendMessage = "Hello World!";
-        messageDeviceA.send(new MyMessage("a", MULTICAST, sendMessage));
+        messageDeviceA.send(new Message("a", MULTICAST, sendMessage));
 
         //then
         assertThrows(IllegalStateException.class, messageDeviceC::receive);
@@ -128,7 +128,7 @@ class IntegrationTest {
 
         //when
         String sendMessage = "Hello World!";
-        messageDeviceA.send(new MyMessage("a", BROADCAST, sendMessage));
+        messageDeviceA.send(new Message("a", BROADCAST, sendMessage));
 
         //then
         String receivedMessageA = messageDeviceA.receive();

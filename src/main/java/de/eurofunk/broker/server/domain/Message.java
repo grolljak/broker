@@ -2,18 +2,19 @@ package de.eurofunk.broker.server.domain;
 
 import java.util.Objects;
 
-public class MyMessage {
+public class Message {
+
     private final String routingKey;
     private final String message;
     private final MessageSemantic semantic;
 
-    public MyMessage(String routingKey, MessageSemantic semantic, String message) {
+    public Message(String routingKey, MessageSemantic semantic, String message) {
         this.routingKey = routingKey;
         this.message = message;
         this.semantic = semantic;
     }
 
-    public MyMessage(MessageSemantic semantic, String message) {
+    public Message(MessageSemantic semantic, String message) {
         this.routingKey = "";
         this.message = message;
         this.semantic = semantic;
@@ -35,10 +36,10 @@ public class MyMessage {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MyMessage myMessage = (MyMessage) o;
-        return Objects.equals(routingKey, myMessage.routingKey) &&
-                Objects.equals(message, myMessage.message) &&
-                semantic == myMessage.semantic;
+        Message message = (Message) o;
+        return Objects.equals(routingKey, message.routingKey) &&
+                Objects.equals(this.message, message.message) &&
+                semantic == message.semantic;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package de.eurofunk.broker.server.component;
 
-import de.eurofunk.broker.server.domain.MyMessage;
+import de.eurofunk.broker.server.domain.Message;
 import de.eurofunk.broker.server.service.QueueService;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ public class Broker {
         this.queueService = queueService;
     }
 
-    public void send(MyMessage message) {
+    public void send(Message message) {
         this.exchange.send(message);
     }
 

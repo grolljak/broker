@@ -3,7 +3,7 @@ package de.eurofunk.broker.api;
 import de.eurofunk.broker.server.component.MessageCenter;
 import de.eurofunk.broker.server.domain.DeviceGroup;
 import de.eurofunk.broker.server.domain.MessageDevice;
-import de.eurofunk.broker.server.domain.MyMessage;
+import de.eurofunk.broker.server.domain.Message;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,19 +38,19 @@ public class MessageCenterController {
     @PostMapping("/sendDirect")
     @ResponseStatus(HttpStatus.OK)
     public void sendDirectMessage(@RequestParam String from, @RequestParam String routingKey, @RequestParam String message) {
-        getMessageDevice(from).send(new MyMessage(routingKey, DIRECT, message));
+        getMessageDevice(from).send(new Message(routingKey, DIRECT, message));
     }
 
     @PostMapping("/sendMulticast")
     @ResponseStatus(HttpStatus.OK)
     public void sendMulticastMessage(@RequestParam String from, @RequestParam String routingKey, @RequestParam String message) {
-        getMessageDevice(from).send(new MyMessage(routingKey, MULTICAST, message));
+        getMessageDevice(from).send(new Message(routingKey, MULTICAST, message));
     }
 
     @PostMapping("/sendBroadcast")
     @ResponseStatus(HttpStatus.OK)
     public void sendBroadcastMessage(@RequestParam String from, @RequestParam String message) {
-        getMessageDevice(from).send(new MyMessage(BROADCAST, message));
+        getMessageDevice(from).send(new Message(BROADCAST, message));
     }
 
     @GetMapping("/receive")
