@@ -6,6 +6,8 @@ import de.eurofunk.broker.server.service.DeviceGroupService;
 import de.eurofunk.broker.server.service.MessageDeviceService;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class MessageCenter {
 
@@ -21,16 +23,19 @@ public class MessageCenter {
        messageDeviceService.registerMessageDevice(device);
     }
 
-    public void removeMessageDevice(MessageDevice device) {
-        messageDeviceService.removeMessageDevice(device);
+    public void removeMessageDevice(String name) {
+        messageDeviceService.removeMessageDevice(name);
     }
 
     public void registerDeviceGroup(DeviceGroup group) {
         deviceGroupService.registerDeviceGroup(group);
     }
 
-    public void removeDeviceGroup(DeviceGroup group) {
-        deviceGroupService.removeDeviceGroup(group);
+    public void removeDeviceGroup(String name) {
+        deviceGroupService.removeDeviceGroup(name);
     }
 
+    public List<MessageDevice> getRegisteredMessageDevices() {
+        return messageDeviceService.getAllMessageDevices();
+    }
 }

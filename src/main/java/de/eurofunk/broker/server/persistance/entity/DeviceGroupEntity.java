@@ -1,9 +1,6 @@
 package de.eurofunk.broker.server.persistance.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +10,17 @@ public class DeviceGroupEntity {
     @Id
     public String name;
 
-    @OneToMany
+    @ManyToMany(cascade =
+            {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST
+            })
+    @JoinTable(
+            name = "MessageDevice_DeviceGroup_Association",
+            joinColumns = @JoinColumn(name = "DeviceGroup_Name"),
+            inverseJoinColumns = @JoinColumn(name = "MessageDevice_Name"))
     List<MessageDeviceEntity> messageDevices = new ArrayList<>();
 
     public String getName() {

@@ -24,8 +24,8 @@ public class DeviceGroupService {
         repository.save(mapper.mapDeviceGroupToEntity(group));
     }
 
-    public void removeDeviceGroup(DeviceGroup group) {
-        repository.deleteById(group.getName());
+    public void removeDeviceGroup(String name) {
+        repository.deleteById(name);
     }
 
     @Transactional

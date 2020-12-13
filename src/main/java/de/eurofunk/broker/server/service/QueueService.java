@@ -26,7 +26,7 @@ public class QueueService {
         if (messageQueue != null) {
             return messageQueue;
         }
-        throw new IllegalArgumentException("Device with name" + deviceName + " was not registered.");
+        throw new RuntimeException("Queue for device with name " + deviceName + " was not correctly initiated.");
     }
 
     public List<MessageQueue> getAllQueues() {
