@@ -1,6 +1,6 @@
 # Device configuration and Message Routing
 
-![Concept diagram](src/main/resources/concept_broker.pdf)
+![Concept diagram](https://github.com/grolljak/broker/raw/master/src/main/resources/concept_broker.pdf)
 
 This project is a simple Spring Boot application that simulates the core logic of a message
 broker. The Message Center allows the registration of multiple Message Devices, which can
