@@ -1,22 +1,23 @@
 package de.eurofunk.broker.server.component;
 
 import de.eurofunk.broker.server.domain.Message;
+import de.eurofunk.broker.server.service.ExchangeService;
 import de.eurofunk.broker.server.service.QueueService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Broker {
 
-    private Exchange exchange;
+    private ExchangeService exchangeService;
     private QueueService queueService;
 
-    public Broker(Exchange exchange, QueueService queueService) {
-        this.exchange = exchange;
+    public Broker(ExchangeService exchangeService, QueueService queueService) {
+        this.exchangeService = exchangeService;
         this.queueService = queueService;
     }
 
     public void send(Message message) {
-        this.exchange.send(message);
+        this.exchangeService.send(message);
     }
 
     public String receive(String deviceName) {
